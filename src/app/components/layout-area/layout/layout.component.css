@@ -1,0 +1,13 @@
+mat-drawer-container {
+    height: 100vh;
+}
+
+mat-drawer {
+    width: 18em;
+}
+
+.btnX {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

@@ -1,0 +1,20 @@
+<div>
+
+
+    <mat-drawer-container class="example-container" [hasBackdrop]="false">
+        <mat-drawer #drawer [mode]="'side'">
+            <button class="btnX" mat-raised-button (click)="drawer.toggle()">❌</button>
+            <app-cart></app-cart>
+        </mat-drawer>
+
+        <mat-drawer-content>
+
+            <header>
+                <button mat-raised-button (click)="drawer.toggle()">עגלת קניות</button>
+                <app-header></app-header>
+            </header>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+</div>

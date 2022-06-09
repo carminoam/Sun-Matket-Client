@@ -1,0 +1,21 @@
+<div class="box">
+    <div>
+        <p>
+            <b>Name :</b> {{product.name}}
+        </p>
+        <p>
+            <b>Price : </b> {{product.price}}
+        </p>
+        <p>
+            <b>Category : </b> {{product.category.name}}
+        </p>
+        <button mat-raised-button color="accent" (click)="toggleInput()">הצג</button>
+        <button mat-raised-button color="accent" *ngIf="showInput" (click)="addToCart()">הוסף לעגלה</button>
+        <input [value]="amountToAdd" min="0" *ngIf="showInput" type="number" />
+    </div>
+    <div>
+        <a routerLink="/products/details/{{product._id}}">
+            <img [src]="productImageUrl + product.imageName" />
+        </a>
+    </div>
+</div>

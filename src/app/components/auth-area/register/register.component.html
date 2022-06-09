@@ -1,0 +1,57 @@
+<div class="box">
+
+    <h2>Register</h2>
+
+    <form (ngSubmit)="submit2()" #formInfo="ngForm" >
+        <div *ngIf="!step1Passed">
+            <label>ID Number : </label>
+            <input type="text" name="idNumber" [(ngModel)]="user.idNumber" required minlength="5" #idNumberBox="ngModel">
+            <span *ngIf="idNumberBox.touched && idNumberBox.errors?.['required']">Missing ID Number</span>
+            <span *ngIf="idNumberBox.touched && idNumberBox.errors?.['minlength']">ID Number has to be min 5 digits</span>
+
+            <label>Email: </label>
+            <input type="text" name="email" [(ngModel)]="user.email" required #emailBox="ngModel" >
+            <span *ngIf="emailBox.touched && emailBox.errors?.['required']">Missing Email</span>
+
+            <label>Password: </label>
+            <input type="password" name="password" [(ngModel)]="user.password" minlength="5" required #passwordBox="ngModel" >
+            <span *ngIf="passwordBox.touched && passwordBox.errors?.['required']">Missing Password</span>
+            <span *ngIf="passwordBox.touched && passwordBox.errors?.['minlength']">Password has to be min 5 characters</span>
+
+            <label>Confirm Password: </label>
+            <input type="password" name="passwordConfirm" [(ngModel)]="passwordConfirm" required #passwordConfirmBox="ngModel" pattern="{{ passwordBox.value }}" />
+            <span *ngIf="passwordConfirmBox.touched && passwordConfirmBox.errors?.['required']">Missing Password Confirmation</span>
+            <span *ngIf="passwordConfirmBox.touched && passwordConfirmBox.errors?.['pattern']"> Password Confirmation Not Matched</span>
+            
+            <button [disabled]="formInfo.invalid" (click)="submit1()" type="button">Next</button>
+        </div>
+
+        <div *ngIf="step1Passed">
+            
+            <label>First name: </label>
+            <input type="text" name="firstName" [(ngModel)]="user.firstName" required #firstNameBox="ngModel" >
+            <span *ngIf="firstNameBox.touched && firstNameBox.errors?.['required']">Missing First Name</span>
+    
+            <label>Last name: </label>
+            <input type="text" name="lastName" [(ngModel)]="user.lastName" required #lastNameBox="ngModel" >
+            <span *ngIf="lastNameBox.touched && lastNameBox.errors?.['required']">Missing Last Name</span> 
+            
+            <label>City : </label>
+            <select name="city" [(ngModel)]="user.city" required #cityBox="ngModel">
+                <option>Tel-Aviv</option>
+                <option>Haifa</option>
+                <option>Jerusalem</option>
+            </select>
+            <span *ngIf="cityBox.touched && cityBox.errors?.['required']">Missing City Name</span>
+            <br/><br/>
+
+            <label>Street : </label>
+            <input type="text" name="address" [(ngModel)]="user.street" required #streetBox="ngModel" >
+            <span *ngIf="streetBox.touched && streetBox.errors?.['required']">Missing Street Name</span>
+
+            <button [disabled]="formInfo.invalid" type="submit">Register</button>
+        </div>
+
+    </form>
+
+</div>
