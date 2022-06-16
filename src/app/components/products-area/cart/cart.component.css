@@ -1,0 +1,14 @@
+p {
+    background-color: aqua;
+    position: relative;
+}
+
+.deleteBtn {
+    background: none;
+    border: 1px solid blue;
+    border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+}

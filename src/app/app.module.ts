@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,7 @@ import { AdminPageComponent } from './components/admin-area/admin-page/admin-pag
 import { AddProductComponent } from './components/admin-area/add-product/add-product.component';
 import { UpdateProductComponent } from './components/admin-area/update-product/update-product.component';
 import { CartComponent } from './components/products-area/cart/cart.component';
+import { JwtInterceptor } from './services/jwt.interceptor';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,8 +31,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-
-
+import { OrderComponent } from './components/products-area/order/order.component';
 
 
 
@@ -51,7 +51,8 @@ import { MatSelectModule } from '@angular/material/select';
     AdminPageComponent,
     AddProductComponent,
     UpdateProductComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [{
+    useClass: JwtInterceptor,
+    provide: HTTP_INTERCEPTORS,
+    multi: true
+  }],
   bootstrap: [LayoutComponent]
 })
 export class AppModule { }

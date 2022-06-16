@@ -1,3 +1,4 @@
+import { OrderComponent } from './components/products-area/order/order.component';
 import { UpdateProductComponent } from './components/admin-area/update-product/update-product.component';
 import { AdminPageComponent } from './components/admin-area/admin-page/admin-page.component';
 import { LoginComponent } from './components/auth-area/login/login.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "", redirectTo: "/home", pathMatch: "full" }, 
   { path: "admin", component: AdminPageComponent },
+  { path: "order", component: OrderComponent },
   { path: "admin/add", component: AddProductComponent },
   { path: "admin/update", component: UpdateProductComponent },
   { path: "products", component: ProductsListComponent },

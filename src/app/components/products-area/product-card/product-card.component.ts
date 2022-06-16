@@ -3,6 +3,8 @@ import { ProductModel } from './../../../models/product.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CartService } from 'src/app/services/cart.service';
+import { CartModel } from 'src/app/models/cart.model';
+import { NotifyService } from 'src/app/services/notify.service';
 
 @Component({
   selector: 'app-product-card',
@@ -11,20 +13,26 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ProductCardComponent implements OnInit {
 
+  async ngOnInit(): Promise<void> {
+    try {
+      this.cart = await this.cartService.getCart();
+    } catch (err) {
+      this.notify.error(err);
+    }
+  }
+
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private notify: NotifyService
   ) { }
 
   public showInput: boolean = false;
   public amountToAdd: number = 0;
-  private cartId: string = "62a1ca6d40911075b92328bd";
+  private cart: CartModel;
   public productImageUrl = environment.productImageUrl;
 
   @Input()
   public product: ProductModel;
-
-  // @Output()
-  // public report = new EventEmitter<ProductModel>();
 
   public toggleInput() {
     this.showInput = !this.showInput;
@@ -32,29 +40,20 @@ export class ProductCardComponent implements OnInit {
 
   public async addToCart() {
     try {
-    let cartItemToAdd = new CartItemModel();
-    cartItemToAdd.productId = this.product._id;
-    cartItemToAdd.quantity = this.amountToAdd;
-    cartItemToAdd.cartId = this.cartId;
-    cartItemToAdd.totalPrice = this.product.price * this.amountToAdd;
-    // console.log(cartItemToAdd);
-    const cartItem = await this.cartService.addCartItem(cartItemToAdd);
-    console.log(cartItem);
-    } catch(err) {
+      let cartItemToAdd = new CartItemModel();
+
+      cartItemToAdd.productId = this.product._id;
+      cartItemToAdd.quantity = this.amountToAdd;
+      cartItemToAdd.cartId = this.cart._id;
+      cartItemToAdd.totalPrice = this.product.price * this.amountToAdd;
+      // console.log(cartItemToAdd);
+      const cartItem = await this.cartService.addCartItem(cartItemToAdd);
+      console.log(cartItem);
+    } catch (err) {
       console.log(err);
     }
 
 
-  }
-
-
-  ngOnInit(): void {
-    try {
-     
-  
-    } catch(err) {
-      console.log(err);
-    }
   }
 
 

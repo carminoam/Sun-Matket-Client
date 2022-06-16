@@ -11,7 +11,7 @@
         </p>
         <button mat-raised-button color="accent" (click)="toggleInput()">הצג</button>
         <button mat-raised-button color="accent" *ngIf="showInput" (click)="addToCart()">הוסף לעגלה</button>
-        <input [value]="amountToAdd" min="0" *ngIf="showInput" type="number" />
+        <input [value]="amountToAdd" min="0" *ngIf="showInput" type="number" [(ngModel)]="amountToAdd"/>
     </div>
     <div>
         <a routerLink="/products/details/{{product._id}}">
