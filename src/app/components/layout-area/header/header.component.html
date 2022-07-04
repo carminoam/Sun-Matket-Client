@@ -1,10 +1,60 @@
 <div>
-    <h1>סופר שמש</h1>
-    <app-auth-menu></app-auth-menu>
-    <div class="buttons">
-        <a routerLink="/home" routerLinkActive="active"><button>דף הבית</button></a>
-        <a routerLink="/products" routerLinkActive="active"><button>חנות</button></a>
-        <a routerLink="/about" routerLinkActive="active"><button>עלינו</button></a>
-        <a routerLink="/admin" routerLinkActive="active"><button>ניהול מוצרים</button></a>
-    </div>
+    <mat-sidenav-container>
+        <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
+            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+            [mode]="(isHandset$ | async) ? 'over' : 'side'">
+            <mat-toolbar *ngIf="user">שלום, {{user.firstName}} {{user.lastName}}.</mat-toolbar>
+            <mat-toolbar *ngIf="!user">שלום, אורח.</mat-toolbar>
+            <mat-nav-list>
+                <button mat-button [matMenuTriggerFor]="menu">
+                    חשבון
+                    <mat-icon>person</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button (click)="drawer.toggle()" routerLink="/register" *ngIf="!user" mat-menu-item>הרשמה</button>
+                    <button (click)="drawer.toggle()" routerLink="/login" *ngIf="!user" mat-menu-item>התחברות</button>
+                    <button (click)="drawer.toggle()" routerLink="/logout" *ngIf="user" mat-menu-item>התנתק</button>
+                </mat-menu>
+                <a mat-list-item (click)="drawer.toggle()" routerLink="/home">דף הבית</a>
+                <a mat-list-item (click)="drawer.toggle()" routerLink="/products">חנות</a>
+                <a mat-list-item (click)="drawer.toggle()" routerLink="/about">עלינו</a>
+                <a mat-list-item (click)="drawer.toggle()" routerLink="/admin" *ngIf="user?.role === 'Admin'">ניהול מוצרים</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <mat-toolbar color="primary">
+                <button (click)="drawer.toggle()" *ngIf="isHandset$ | async" mat-icon-button>
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <!-- <button mat-icon-button>
+                        <mat-icon>person</mat-icon>
+                    </button>               -->
+                <span>סופר שמש</span>
+                <img alt="sun-logo" src="../../../../assets/images/sun-logo.png" />
+
+                <section *ngIf="!(isHandset$ | async)">
+                    <div class="example-button-row">
+                        <button mat-button routerLink="/home">דף הבית</button>
+                        <button mat-button routerLink="/products">חנות</button>
+                        <button mat-button routerLink="/about">עלינו</button>
+                        <button mat-button routerLink="/admin" *ngIf="user?.role === 'Admin'">ניהול מוצרים</button>
+                        <button mat-button [matMenuTriggerFor]="menu">
+                            חשבון
+                            <mat-icon>person</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button routerLink="/register" *ngIf="!user" mat-menu-item>הרשמה</button>
+                            <button routerLink="/login" *ngIf="!user" mat-menu-item>התחברות</button>
+                            <button routerLink="/logout" *ngIf="user" mat-menu-item>התנתק</button>
+                        </mat-menu>
+                    </div>
+                    <span *ngIf="user" class="user-name">שלום, {{user.firstName}} {{user.lastName}}</span>
+                    <span *ngIf="!user" class="user-name">שלום, אורח.</span>
+
+                </section>
+                <!-- <app-auth-menu></app-auth-menu> -->
+            </mat-toolbar>
+            <ng-content></ng-content>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

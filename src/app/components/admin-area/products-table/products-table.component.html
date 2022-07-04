@@ -1,0 +1,25 @@
+<div class="products-table">
+    <table matSort (matSortChange)="sortData($event)">
+        <!-- <table matSort> -->
+        <tr>
+            <th>#</th>
+            <th mat-sort-header="name">שם המוצר</th>
+            <th mat-sort-header="price">מחיר ליח'</th>
+            <th mat-sort-header="category">קטגוריה</th>
+            <th>עריכת מוצר</th>
+        </tr>
+
+        <tr *ngFor="let p of sortedData">
+            <td>{{sortedData.indexOf(p) + 1}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.price | currency: "ILS"}}</td>
+            <td>{{p.category.name}}</td>
+            <td>
+                <button routerLink="/admin/update" mat-raised-button color="primary">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</div>

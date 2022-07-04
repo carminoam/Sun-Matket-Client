@@ -3,6 +3,7 @@ export const environment = {
   productsUrl: 'http://localhost:3001/api/products/',
   cartUrl: 'http://localhost:3001/api/cart/',
   cartItemsUrl: 'http://localhost:3001/api/cart/items/',
+  ordersUrl: 'http://localhost:3001/api/orders/',
   productImageUrl: 'http://localhost:3001/api/product/image/',
   categoriesUrl: 'http://localhost:3001/api/products/categories',
   register1Url: 'http://localhost:3001/api/auth/register1/',

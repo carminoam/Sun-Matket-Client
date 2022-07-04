@@ -1,5 +1,6 @@
 import { cartReducer } from './cart-state';
 import { combineReducers, createStore } from "redux";
+
 import { authReducer } from "./auth-state";
 import { productsReducer } from "./products-state";
 
@@ -12,5 +13,6 @@ const reducers = combineReducers({
 
 // The most important Redux object: 
 const store = createStore(reducers);
+
 
 export default store;

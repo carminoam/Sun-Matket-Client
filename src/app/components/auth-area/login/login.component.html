@@ -1,17 +1,18 @@
-<p>login works!</p>
-<div class="box">
+<div class="box login">
 
-    <h2>Login</h2>
+    <h2>התחברות</h2>
 
     <form (ngSubmit)="submit()">
 
-        <label>Email: </label>
+        <label>אימייל : </label>
         <input type="text" name="email" [(ngModel)]="credentials.email">
 
-        <label>Password: </label>
+        <label>סיסמה :</label>
         <input type="password" name="password" [(ngModel)]="credentials.password">
 
-        <button>Login</button>
+        <a routerLink="/register">אין לך חשבון? לחץ כאן</a>
+
+        <button mat-raised-button color="primary">התחבר</button>
 
     </form>
 

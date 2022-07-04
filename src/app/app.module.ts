@@ -9,7 +9,6 @@ import { HeaderComponent } from './components/layout-area/header/header.componen
 import { HomeComponent } from './components/home-area/home/home.component';
 import { AboutComponent } from './components/about-area/about/about.component';
 import { PageNotFoundComponent } from './components/layout-area/page-not-found/page-not-found.component';
-import { AuthMenuComponent } from './components/auth-area/auth-menu/auth-menu.component';
 import { LoginComponent } from './components/auth-area/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/auth-area/register/register.component';
@@ -28,11 +27,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 import { OrderComponent } from './components/products-area/order/order.component';
-
+import { LayoutModule } from '@angular/cdk/layout';
+import { DialogComponent } from './components/products-area/dialog/dialog.component';
+import { ProductsTableComponent } from './components/admin-area/products-table/products-table.component';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 
 @NgModule({
@@ -44,7 +51,6 @@ import { OrderComponent } from './components/products-area/order/order.component
     HomeComponent,
     AboutComponent,
     PageNotFoundComponent,
-    AuthMenuComponent,
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
@@ -52,8 +58,12 @@ import { OrderComponent } from './components/products-area/order/order.component
     AddProductComponent,
     UpdateProductComponent,
     CartComponent,
-    OrderComponent
+    OrderComponent,
+    DialogComponent,
+    ProductsTableComponent,
+    HighlightPipe
   ],
+  entryComponents: [DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -68,7 +78,14 @@ import { OrderComponent } from './components/products-area/order/order.component
     MatCardModule,
     MatSliderModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    LayoutModule,
+    MatTabsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatSortModule
+
   ],
   providers: [{
     useClass: JwtInterceptor,

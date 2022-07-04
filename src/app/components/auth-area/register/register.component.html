@@ -1,55 +1,72 @@
-<div class="box">
+<div class="box register">
 
-    <h2>Register</h2>
+    <h2>הרשמה</h2>
 
-    <form (ngSubmit)="submit2()" #formInfo="ngForm" >
+    <form (ngSubmit)="submit2()" #formInfo="ngForm">
         <div *ngIf="!step1Passed">
-            <label>ID Number : </label>
-            <input type="text" name="idNumber" [(ngModel)]="user.idNumber" required minlength="5" #idNumberBox="ngModel">
-            <span *ngIf="idNumberBox.touched && idNumberBox.errors?.['required']">Missing ID Number</span>
-            <span *ngIf="idNumberBox.touched && idNumberBox.errors?.['minlength']">ID Number has to be min 5 digits</span>
 
-            <label>Email: </label>
-            <input type="text" name="email" [(ngModel)]="user.email" required #emailBox="ngModel" >
-            <span *ngIf="emailBox.touched && emailBox.errors?.['required']">Missing Email</span>
+            <label>מספר ת.ז : </label>
+            <input type="text" name="idNumber" [(ngModel)]="user.idNumber" required minlength="5"
+                #idNumberBox="ngModel">
+            <span *ngIf="idNumberBox.touched && idNumberBox.errors?.['required']">יש למלא מזפר ת.ז</span>
+            <span *ngIf="idNumberBox.touched && idNumberBox.errors?.['minlength']">מספר ת.ז חייב להכיל לפחות 5
+                ספרות</span>
 
-            <label>Password: </label>
-            <input type="password" name="password" [(ngModel)]="user.password" minlength="5" required #passwordBox="ngModel" >
-            <span *ngIf="passwordBox.touched && passwordBox.errors?.['required']">Missing Password</span>
-            <span *ngIf="passwordBox.touched && passwordBox.errors?.['minlength']">Password has to be min 5 characters</span>
+            <label>אימייל : </label>
+            <input type="text" name="email" [(ngModel)]="user.email" required #emailBox="ngModel">
+            <span *ngIf="emailBox.touched && emailBox.errors?.['required']">יש להזין אימייל</span>
 
-            <label>Confirm Password: </label>
-            <input type="password" name="passwordConfirm" [(ngModel)]="passwordConfirm" required #passwordConfirmBox="ngModel" pattern="{{ passwordBox.value }}" />
-            <span *ngIf="passwordConfirmBox.touched && passwordConfirmBox.errors?.['required']">Missing Password Confirmation</span>
-            <span *ngIf="passwordConfirmBox.touched && passwordConfirmBox.errors?.['pattern']"> Password Confirmation Not Matched</span>
-            
-            <button [disabled]="formInfo.invalid" (click)="submit1()" type="button">Next</button>
+            <label>סיסמה : </label>
+            <input type="password" name="password" [(ngModel)]="user.password" minlength="5" required
+                #passwordBox="ngModel">
+            <span *ngIf="passwordBox.touched && passwordBox.errors?.['required']">יש להזין סיסמה</span>
+            <span *ngIf="passwordBox.touched && passwordBox.errors?.['minlength']">סיסמא חייבת להכיל לפחות 5
+                תווים</span>
+
+            <label>אימות סיסמה : </label>
+            <input type="password" name="passwordConfirm" [(ngModel)]="passwordConfirm" required
+                #passwordConfirmBox="ngModel" pattern="{{ passwordBox.value }}" />
+            <span *ngIf="passwordConfirmBox.touched && passwordConfirmBox.errors?.['required']">יש להזין אימות
+                סיסמה</span>
+            <span *ngIf="passwordConfirmBox.touched && passwordConfirmBox.errors?.['pattern']"> אימות סיסמה לא
+                תואם</span>
+
+            <button mat-raised-button color="primary" [disabled]="formInfo.invalid" (click)="submit1()" type="button">הבא</button>
+            <!-- <button mat-raised-button color="warn" routerLink="/products">חזרה לקניות</button> -->
         </div>
 
         <div *ngIf="step1Passed">
-            
-            <label>First name: </label>
-            <input type="text" name="firstName" [(ngModel)]="user.firstName" required #firstNameBox="ngModel" >
-            <span *ngIf="firstNameBox.touched && firstNameBox.errors?.['required']">Missing First Name</span>
-    
-            <label>Last name: </label>
-            <input type="text" name="lastName" [(ngModel)]="user.lastName" required #lastNameBox="ngModel" >
-            <span *ngIf="lastNameBox.touched && lastNameBox.errors?.['required']">Missing Last Name</span> 
-            
-            <label>City : </label>
+
+            <label>שם פרטי : </label>
+            <input type="text" name="firstName" [(ngModel)]="user.firstName" required #firstNameBox="ngModel">
+            <span *ngIf="firstNameBox.touched && firstNameBox.errors?.['required']">יש להזין שם פרטי</span>
+
+            <label>שם משפחה : </label>
+            <input type="text" name="lastName" [(ngModel)]="user.lastName" required #lastNameBox="ngModel">
+            <span *ngIf="lastNameBox.touched && lastNameBox.errors?.['required']">יש להזין שם משפחה</span>
+
+            <label>עיר מגורים : </label>
             <select name="city" [(ngModel)]="user.city" required #cityBox="ngModel">
-                <option>Tel-Aviv</option>
-                <option>Haifa</option>
-                <option>Jerusalem</option>
+                <option>תל אביב</option>
+                <option>חיפה</option>
+                <option>רמת-גן</option>
+                <option>גבעתיים</option>
+                <option>טבריה</option>
+                <option>מודיעין</option>
+                <option>אשדוד</option>
+                <option>באר-שבע</option>
+                <option>אשקלון</option>
+                <option>טבריה</option>
+
             </select>
-            <span *ngIf="cityBox.touched && cityBox.errors?.['required']">Missing City Name</span>
-            <br/><br/>
+            <span *ngIf="cityBox.touched && cityBox.errors?.['required']">יש להזין עיר מגורים</span>
+            <br /><br />
 
-            <label>Street : </label>
-            <input type="text" name="address" [(ngModel)]="user.street" required #streetBox="ngModel" >
-            <span *ngIf="streetBox.touched && streetBox.errors?.['required']">Missing Street Name</span>
+            <label>רחוב : </label>
+            <input type="text" name="address" [(ngModel)]="user.street" required #streetBox="ngModel">
+            <span *ngIf="streetBox.touched && streetBox.errors?.['required']">יש להזין את שם הרחוב</span>
 
-            <button [disabled]="formInfo.invalid" type="submit">Register</button>
+            <button mat-raised-button color="primary" [disabled]="formInfo.invalid" type="submit">הרשמה</button>
         </div>
 
     </form>

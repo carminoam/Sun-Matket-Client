@@ -1,21 +1,22 @@
-<div class="box">
-    <div>
-        <p>
-            <b>Name :</b> {{product.name}}
-        </p>
-        <p>
-            <b>Price : </b> {{product.price}}
-        </p>
-        <p>
-            <b>Category : </b> {{product.category.name}}
-        </p>
-        <button mat-raised-button color="accent" (click)="toggleInput()">הצג</button>
-        <button mat-raised-button color="accent" *ngIf="showInput" (click)="addToCart()">הוסף לעגלה</button>
-        <input [value]="amountToAdd" min="0" *ngIf="showInput" type="number" [(ngModel)]="amountToAdd"/>
-    </div>
-    <div>
-        <a routerLink="/products/details/{{product._id}}">
+<div class="box product-card">
+        <!-- <a routerLink="/products/details/{{product._id}}"> -->
             <img [src]="productImageUrl + product.imageName" />
-        </a>
-    </div>
+        <!-- </a> -->
+        <p>
+            <b>שם המוצר :</b> {{product.name}}
+        </p>
+        <p>
+            <b>מחיר : </b> {{product.price | currency: '₪'}}
+        </p>
+        <p>
+            <b>קטגוריה : </b> {{product.category.name}}
+
+        </p>
+        <button mat-raised-button color="primary" (click)="openDialog()">הוסף לעגלה</button>
+        <!-- <button mat-raised-button color="primary" (click)="toggleInput()">הצג</button> -->
+        <!-- <button mat-raised-button color="primary" *ngIf="showInput" (click)="addToCart()">הוסף לעגלה</button> -->
+        <!-- <input [value]="amountToAdd" min="0" *ngIf="showInput" type="number" [(ngModel)]="amountToAdd"/> -->
 </div>
+
+
+  

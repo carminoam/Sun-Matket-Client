@@ -1,0 +1,14 @@
+.mat-sort-header-container {
+  align-items: center;
+}
+
+.products-table {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+td, th {
+  padding: 0.5rem 1rem;
+}

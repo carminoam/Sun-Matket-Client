@@ -1,3 +1,4 @@
+import { OrderModel } from './../models/order.model';
 import store from 'src/app/redux/store';
 import { Injectable } from '@angular/core';
 import { CartItemModel } from '../models/cart-item.model';
@@ -5,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CartModel } from '../models/cart.model';
-import { addToCartAction, deleteAllCartItemsAction, removeFromCartAction, updateCartItemAction } from '../redux/cart-state';
+import { addToCartAction, deleteAllCartItemsAction, fetchCartItemsAction, removeFromCartAction, updateCartItemAction } from '../redux/cart-state';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,9 @@ export class CartService {
   // Get cart items:
   public async getCartItems(cartId: string): Promise<CartItemModel[]> {
     let cartItems = store.getState().cartState.cartItems;
-    if (!cartItems) {
+    if (cartItems.length  === 0) {
       cartItems = await firstValueFrom(this.http.get<CartItemModel[]>(environment.cartItemsUrl + cartId));
+      store.dispatch(fetchCartItemsAction(cartItems));
     }
     return cartItems;
   }
@@ -41,8 +43,8 @@ export class CartService {
 
   // Delete cart item:
   public async deleteCartItem(itemId: string): Promise<void> {
-    await firstValueFrom(this.http.delete(environment.cartItemsUrl + itemId));
     store.dispatch(removeFromCartAction(itemId));
+    await firstValueFrom(this.http.delete(environment.cartItemsUrl + itemId));
   }
 
   // Update cart item:
@@ -56,6 +58,11 @@ export class CartService {
   public async deleteAllCartItems(cartId: string): Promise<void> {
     await firstValueFrom(this.http.delete(environment.cartItemsUrl + "clean/" + cartId));
     store.dispatch(deleteAllCartItemsAction(cartId));
+  }
+
+  // Create new order:
+  public async createOrder(order: OrderModel): Promise<void> {
+    await firstValueFrom(this.http.post<OrderModel>(environment.ordersUrl, order ));
   }
   
 }

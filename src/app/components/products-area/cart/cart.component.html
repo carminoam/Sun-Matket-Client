@@ -1,11 +1,13 @@
 
 <div>
     <h3>עגלת קניות</h3>
-    <button (click)="cleanCart()">נקה עגלה</button>
-    <button routerLink="/order">בצע הזמנה</button><br><br>
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="cleanCart()">נקה עגלה</button>
+        <button mat-raised-button color="primary" routerLink="/order">בצע הזמנה</button><br><br>
+    </div>
      לתשלום : {{totalPrice | currency:'₪'}}<br><br>
     <p *ngFor="let p of cartItems" >
         <button (click)="removeItem(p._id)" class="deleteBtn">X</button>
-        {{p.product?.name}} - {{p.product?.price | currency: "ILS"}}
+        {{p.quantity}} יח' - {{p.product.name}} - {{p.totalPrice | currency: "ILS"}}
     </p>
 </div>

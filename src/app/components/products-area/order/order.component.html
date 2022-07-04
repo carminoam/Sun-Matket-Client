@@ -1,3 +1,85 @@
-<div>
-    <button (click)="orderNow()">הזמן עכשיו !</button>
+<div class="order">
+  <div class="order-details" *ngIf="true">
+    <!-- <img alt="sun-logo" src="../../../../assets/images/sun-logo.png" /> -->
+    <h2>פרטי ההזמנה</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>חיפוש בהזמנה</mat-label>
+      <!-- <input matInput type="text" name="searchString" (keyup)="search($event)" > -->
+      <input matInput type="text" name="searchString" [(ngModel)]="searchString" >
+    </mat-form-field>
+    <table class="order-table">
+      <tr>
+        <th>#</th>
+        <th>שם המוצר</th>
+        <th>כמות</th>
+        <th>מחיר ליחידה</th>
+        <th>סה"כ מחיר</th>
+      </tr>
+
+      <tr *ngFor="let cartItem of cartItems">
+        <td>{{cartItems.indexOf(cartItem) + 1}}</td>
+        <td [innerHTML]="cartItem.product.name | highlight: searchString" ></td>
+        <td>{{cartItem.quantity}}</td>
+        <td>{{cartItem.product.price | currency: "ILS"}}</td>
+        <td>{{cartItem.totalPrice | currency: "ILS"}}</td>
+      </tr>
+    </table>
+
+    <p><b>סה"כ לתשלום : </b>{{getTotalPrice(cartItems) | currency: "ILS"}}</p>
+
+    <form (ngSubmit)="makeOrder()">
+
+      <h3>פרטי המזמין </h3>
+
+      <p><b>שם המזמין : </b>{{user.firstName + ' ' + user.lastName}}</p>
+      <p><b>דוא"ל : </b>{{user.email}}</p>
+
+      <h3>כתובת למשלוח </h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>עיר</mat-label>
+        <input matInput name="city" [(ngModel)]="order.city">
+      </mat-form-field><br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>רחוב</mat-label>
+        <input name="street" matInput [(ngModel)]="order.street">
+      </mat-form-field><br>
+
+      <h3> תשלום באשראי </h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>מספר כרטיס</mat-label>
+        <input matInput [(ngModel)]="order.payment4Digits" name="payment4Digits">
+      </mat-form-field><br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>תאריך תפוגה</mat-label>
+        <input matInput>
+      </mat-form-field><br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>3 ספרות בגב הכטיס</mat-label>
+        <input matInput>
+      </mat-form-field><br>
+
+
+      <div class="buttons">
+        <button mat-raised-button color="primary">הזמן עכשיו !</button>
+        <button mat-raised-button color="warn" routerLink="/products">חזרה לקניות</button>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="thank-you" *ngIf="true">
+    <h2>תודה שהזמנת סופר שמש !</h2>
+    <p>אנחנו עושים את כל המאמצים כדי שהמשלוח יגיע במהירות המקסימלית...</p>
+    <button mat-raised-button color="primary" (click)="printInvoice()">
+      <mat-icon>file_download</mat-icon>
+      להורדת הקבלה
+    </button>
+    <button mat-raised-button color="primary" routerLink="/products">חזרה לחנות</button>
+  </div>
+
 </div>

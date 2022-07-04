@@ -40,7 +40,7 @@ export class ProductsService {
         formData.append("pic", product.image);
         
         const addedProduct = await firstValueFrom(this.http.post<ProductModel>(environment.productsUrl, formData));
-        
+        console.log(addedProduct);
         store.dispatch(addProductAction(addedProduct));
         
         return addedProduct;
@@ -65,35 +65,6 @@ export class ProductsService {
         store.dispatch(deleteProductAction(id));
     }
 
-    // public async fetchCartProducts(): Promise<ProductModel[]> {
-    //     const cartProducts = await store.getState().productsState.cartProducts;
-    //     return cartProducts;
-    // }
-
-    // public async addToCart(product: ProductModel): Promise<void> {
-    //     const cartProducts = await this.fetchCartProducts();
-    //     const productInCart = cartProducts.find(p => p.id === product.id);
-    //     if (productInCart) {
-    //         productInCart.quantity++;
-    //     } else {
-    //         product.quantity = 1;
-    //         cartProducts.push(product);
-    //     }
-    //     store.dispatch(addProductAction(cartProducts));
-    // }
-
-    // public async removeFromCart(product: ProductModel): Promise<void> {
-    //     const cartProducts = await this.fetchCartProducts();
-    //     const productInCart = cartProducts.find(p => p.id === product.id);
-    //     if (productInCart) {
-    //         productInCart.quantity--;
-    //         if (productInCart.quantity === 0) {
-    //             cartProducts.splice(cartProducts.indexOf(productInCart), 1);
-    //         }
-    //     }
-    //     store.dispatch(addProductAction(cartProducts));
-    // }
-
     public async getAllCategories(): Promise<CategoryModel[]> {
         let categories = store.getState().productsState.categories;
         if (categories.length === 0) {
@@ -103,4 +74,16 @@ export class ProductsService {
         return categories;
     }
     
+    public async searchProducts(searchString: string): Promise<ProductModel[]>{
+        const products = await this.getAllProducts();
+        const filteredProducts = products.filter(p => p.name.includes(searchString));
+        // const filteredProducts = await firstValueFrom(this.http.get<ProductModel[]>(environment.productsUrl + "search/" + searchString));
+        return filteredProducts;
+    }
+
+    public async filterByCategory(categoryId: string): Promise<ProductModel[]>{
+        const products = await this.getAllProducts();
+        const filteredProducts = products.filter(p => p.categoryId === categoryId);
+        return filteredProducts;
+    }
 }

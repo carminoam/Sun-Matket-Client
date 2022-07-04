@@ -1,0 +1,11 @@
+<div class="dialog">
+    <h1 mat-dialog-title>{{data.name}}</h1>
+    <mat-dialog-content>
+        אנא בחר כמות להזמנה :
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <input matInput type="number" [(ngModel)]="amount"><br>
+        <button mat-raised-button color="primary" [mat-dialog-close]="amount">הוסף לעגלה</button>
+        <button mat-raised-button color="warn" mat-dialog-close>ביטול</button>
+    </mat-dialog-actions>
+</div>

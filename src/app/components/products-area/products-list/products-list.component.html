@@ -1,3 +1,42 @@
-<div>
-    <app-product-card *ngFor="let p of products" [product]="p"></app-product-card>
+<div class="products-list">
+    <mat-drawer-container class="example-container" [hasBackdrop]="false">
+        <!-- <button class="btnX" mat-raised-button (click)="drawer.toggle()">❌</button> -->
+        <mat-drawer #drawer [mode]="'side'" opened="">
+            <app-cart></app-cart>
+        </mat-drawer>
+
+        <mat-drawer-content>
+            <button class="btnCart" mat-raised-button (click)="drawer.toggle()">
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+            <div class="products-list-header">
+                <div>
+                    <form (ngSubmit)="searchByString(searchString)">
+   
+                            <mat-form-field appearance="fill">
+                                <mat-label>חיפוש מוצר</mat-label>
+                                <input matInput type="text" name="searchString" [(ngModel)]="searchString">
+                            </mat-form-field>
+
+                        <!-- <input matInput type="text" name="searchString" [(ngModel)]="searchString" /> -->
+                        <button mat-raised-button color="primary">חפש מוצרים</button>
+                    </form>
+                </div>
+                <div>
+                    <mat-form-field  appearance="fill">
+                        <mat-label>בחר קטגוריה</mat-label>
+                        <mat-select (selectionChange)="filterByCategory($event)">
+                          <mat-option value="none">כל המוצרים</mat-option>
+                          <mat-option [value]="category._id" *ngFor="let category of categories">{{category.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="cards-container">
+                <app-product-card *ngFor="let p of filteredProducts" [product]="p"></app-product-card>
+            </div>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
 </div>

@@ -4,7 +4,7 @@ export class ProductModel {
     public price: number;
     public categoryId: string;
     public category: any;
-    public cartQuantity: number = 0;
+    // public cartQuantity: number = 0;
     public imageName: string;
     public image: File;
 }

@@ -1,14 +1,17 @@
 p {
-    background-color: aqua;
     position: relative;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .deleteBtn {
-    background: none;
-    border: 1px solid blue;
+    border: none;
     border-radius: 5px;
     position: absolute;
     top: 0px;
-    right: 0px;
+    right: 10px;
     cursor: pointer;
+}
+
+.buttons > * {
+    margin: 5px;
 }

@@ -4,7 +4,7 @@ import { CartItemModel } from './../models/cart-item.model';
 
 export class CartState {
     public cart: CartModel;
-    public cartItems: CartItemModel[];
+    public cartItems: CartItemModel[] = [];
 }
 
 export enum CartActionType {
@@ -71,6 +71,5 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
             newState.cartItems = [];
             break;
     }
-
     return newState;
 }

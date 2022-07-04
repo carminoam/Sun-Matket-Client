@@ -1,3 +1,5 @@
+import { RoleModel } from "./role-model";
+
 export class userAddress {
     city: string;
     street: string;
@@ -5,13 +7,13 @@ export class userAddress {
 }
 
 export class UserModel {
-    public id: number;
+    public _id: string;
     public firstName: string;
     public lastName: string;
     public idNumber: string;
     public email: string;
     public city: string;
     public street: string;
-    public role: string;
+    public role: string = RoleModel.USER;
     public password: string;
 }
