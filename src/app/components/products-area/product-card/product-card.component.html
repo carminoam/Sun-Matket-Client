@@ -1,6 +1,6 @@
 <div class="box product-card">
         <!-- <a routerLink="/products/details/{{product._id}}"> -->
-            <img [src]="productImageUrl + product.imageName" />
+            <img *ngIf="product.imageName" [src]="productImageUrl + product?.imageName" />
         <!-- </a> -->
         <p>
             <b>שם המוצר :</b> {{product.name}}
@@ -13,9 +13,6 @@
 
         </p>
         <button mat-raised-button color="primary" (click)="openDialog()">הוסף לעגלה</button>
-        <!-- <button mat-raised-button color="primary" (click)="toggleInput()">הצג</button> -->
-        <!-- <button mat-raised-button color="primary" *ngIf="showInput" (click)="addToCart()">הוסף לעגלה</button> -->
-        <!-- <input [value]="amountToAdd" min="0" *ngIf="showInput" type="number" [(ngModel)]="amountToAdd"/> -->
 </div>
 
 

@@ -4,6 +4,8 @@ import { ProductsService } from './../../../services/products.service';
 import { ProductModel } from './../../../models/product.model';
 import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { Unsubscribe } from 'redux';
+import store from 'src/app/redux/store';
 
 @Component({
   selector: 'app-products-list',
@@ -16,6 +18,7 @@ export class ProductsListComponent implements OnInit {
   public searchString: string;
   public filteredProducts: ProductModel[];
   public categories: CategoryModel[];
+  // private unsubscribe: Unsubscribe;
 
   constructor(
     private productsService: ProductsService,
@@ -27,12 +30,18 @@ export class ProductsListComponent implements OnInit {
       this.categories = await this.productsService.getAllCategories();
       this.products = await this.productsService.getAllProducts();
       this.filteredProducts = this.products;
-      console.log(this.filteredProducts);
+      // this.unsubscribe = store.subscribe(async () => {
+      //   this.products = await this.productsService.getAllProducts();
+      // });
     }
     catch (err: any) {
       this.notifyService.error(err);
     }
   }
+
+  // ngOnDestroy() {
+  //   this.unsubscribe();
+  // }
 
   public async searchByString(str: string): Promise<void> {
     if (str) {
@@ -43,9 +52,9 @@ export class ProductsListComponent implements OnInit {
   }
 
   public category: CategoryModel;
-  public categoryChanged(): void {
-    console.log("categoryChanged");
-  }
+  // public categoryChanged(): void {
+  //   console.log("categoryChanged");
+  // }
 
   public async filterByCategory(event: MatSelectChange): Promise<void> {
     // const categoryId = (event.target as HTMLSelectElement).value;

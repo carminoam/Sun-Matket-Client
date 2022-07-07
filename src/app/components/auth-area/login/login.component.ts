@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifyService } from 'src/app/services/notify.service';
 import { AuthService } from 'src/app/services/auth.service';
+import store from 'src/app/redux/store';
+import { RoleModel } from 'src/app/models/role-model';
 
 @Component({
     selector: 'app-login',
@@ -19,7 +21,11 @@ export class LoginComponent {
         try {
             await this.authService.login(this.credentials);
             this.notify.success("You have been logged in");
-            this.router.navigateByUrl("/home");
+            if (store.getState().authState.user.role === RoleModel.ADMIN){
+                this.router.navigateByUrl("/admin");
+            } else{
+                this.router.navigateByUrl("/home");
+            }
         }
         catch(err: any) {
             this.notify.error(err);

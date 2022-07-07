@@ -70,7 +70,7 @@ export function productsReducer(currentState = new ProductsState(), action: Prod
             break;
 
         case ProductsActionType.UpdateProduct:
-            const indexToUpdate = newState.products.findIndex(p => p._id === action.payload.id); // Here the payload is a single object to update.
+            const indexToUpdate = newState.products.findIndex(p => p._id === action.payload._id); // Here the payload is a single object to update.
             if (indexToUpdate >= 0) {
                 newState.products[indexToUpdate] = action.payload;
             }
@@ -83,20 +83,20 @@ export function productsReducer(currentState = new ProductsState(), action: Prod
             }
             break;
 
-        case ProductsActionType.FetchCartProducts:
-            newState.cartProducts = action.payload; // Here the payload is the cart-products list.
-            break;
+        // case ProductsActionType.FetchCartProducts:
+        //     newState.cartProducts = action.payload; // Here the payload is the cart-products list.
+        //     break;
 
-        case ProductsActionType.AddCartProduct:
-            newState.cartProducts.push(action.payload); // Here the payload is a single object to add.
-            break;
+        // case ProductsActionType.AddCartProduct:
+        //     newState.cartProducts.push(action.payload); // Here the payload is a single object to add.
+        //     break;
 
-        case ProductsActionType.DeleteCartProduct:
-            const indexToDeleteCart = newState.cartProducts.findIndex(p => p._id === action.payload); // Here the payload is the id to delete.
-            if (indexToDeleteCart >= 0) {
-                newState.cartProducts.splice(indexToDeleteCart, 1);
-            }
-            break;
+        // case ProductsActionType.DeleteCartProduct:
+        //     const indexToDeleteCart = newState.cartProducts.findIndex(p => p._id === action.payload); // Here the payload is the id to delete.
+        //     if (indexToDeleteCart >= 0) {
+        //         newState.cartProducts.splice(indexToDeleteCart, 1);
+        //     }
+        //     break;
 
         case ProductsActionType.FetchCategories:
             newState.categories = action.payload; // Here the payload is the categories list.

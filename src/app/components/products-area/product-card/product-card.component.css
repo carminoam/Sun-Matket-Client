@@ -9,6 +9,7 @@ img {
     flex-direction: column;
     align-items: flex-start;
     width: 250px;
+    min-height: 500px;
     /* align-items: center; */
     padding: 10px;
 }

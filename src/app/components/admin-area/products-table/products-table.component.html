@@ -15,11 +15,10 @@
             <td>{{p.price | currency: "ILS"}}</td>
             <td>{{p.category.name}}</td>
             <td>
-                <button routerLink="/admin/update" mat-raised-button color="primary">
+                <button routerLink="/admin/update/{{p._id}}" mat-raised-button color="primary">
                     <mat-icon>edit</mat-icon>
                 </button>
             </td>
         </tr>
     </table>
-
 </div>

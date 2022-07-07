@@ -1,1 +1,26 @@
-<p>update-product works!</p>
+<div class="box update-product">
+    <h2>עדכן מוצר</h2>
+    <form (ngSubmit)="onUpdate(updateForm.value)" #updateForm="ngForm">
+
+        <img *ngIf="product?.imageName" alt="product-image" [src]="productImagesUrl + product.imageName" />
+
+        <label>שם המוצר : </label>
+        <input type="text" name="name" [ngModel]="product?.name">
+
+        <label>מחיר : </label>
+        <input type="number" name="price" step="0.01" [ngModel]="product?.price">
+
+        <label>קטגוריה : </label>
+        <select name="categoryId" required ngModel [ngModel]="product?.categoryId">
+            <option *ngFor="let category of categories" [value]="category._id">{{category.name}}</option>
+        </select>
+        <br><br>
+
+        <label>תמונה : </label>
+        <br><br>
+        <input type="file" name="image" accept="image/*" #imageBox>
+
+        <button mat-raised-button color="primary">עדכן</button>
+    </form>
+
+</div>

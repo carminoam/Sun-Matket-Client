@@ -61,8 +61,9 @@ export class CartService {
   }
 
   // Create new order:
-  public async createOrder(order: OrderModel): Promise<void> {
-    await firstValueFrom(this.http.post<OrderModel>(environment.ordersUrl, order ));
+  public async createOrder(order: OrderModel): Promise<OrderModel> {
+    const newOrder = await firstValueFrom(this.http.post<OrderModel>(environment.ordersUrl, order ));
+    return newOrder;
   }
   
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: "admin", component: AdminPageComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: "order", component: OrderComponent },
   { path: "admin/add", component: AddProductComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: "admin/update", component: UpdateProductComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: "admin/update/:id", component: UpdateProductComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: "products", component: ProductsListComponent, canActivate: [AuthGuard] },
   { path: "about", component: AboutComponent },
   { path: "register", component: RegisterComponent },
